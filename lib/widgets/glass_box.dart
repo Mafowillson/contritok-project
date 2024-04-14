@@ -9,7 +9,8 @@ class GlassBox extends StatelessWidget {
   const GlassBox({
     super.key,
     required this.width,
-    required this.child, required this.height,
+    required this.height,
+    required this.child,
   });
 
   final _borderRadius = const BorderRadius.only(
