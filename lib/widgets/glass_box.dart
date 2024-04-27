@@ -55,7 +55,7 @@ class GlassBox extends StatelessWidget {
 
             //child
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(8),
               child: child,
             ),
           ],

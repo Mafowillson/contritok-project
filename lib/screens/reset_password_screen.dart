@@ -1,28 +1,32 @@
 import 'package:contritok/constants/images.dart';
 import 'package:contritok/widgets/custom_button.dart';
+import 'package:contritok/widgets/custom_text_field.dart';
 import 'package:contritok/widgets/glass_box.dart';
 import 'package:flutter/material.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 
-class VerifyEmailScreen extends StatefulWidget {
-  const VerifyEmailScreen({super.key});
+
+class ResetPasswordScreen extends StatefulWidget {
+  const ResetPasswordScreen({super.key});
 
   @override
-  State<VerifyEmailScreen> createState() => _VerifyEmailScreenState();
+  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
 }
 
-class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
-  late final TextEditingController _codeController;
+class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+  late final TextEditingController _password;
+  late final TextEditingController _confirmPassword;
 
   @override
   void initState() {
-    _codeController = TextEditingController();
+    _password = TextEditingController();
+    _confirmPassword = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
-    _codeController.dispose();
+    _password.dispose();
+    _confirmPassword.dispose();
     super.dispose();
   }
 
@@ -43,7 +47,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               const Text(
-                'Verify Email',
+                'Reset Password',
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
@@ -56,31 +60,21 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                        'Please enter the 4 digit verification code sent to '),
-                    const Text('example@gmail.com'),
-                    PinCodeTextField(
-                      controller: _codeController,
-                      appContext: context,
-                      length: 4,
-                      autoFocus: true,
-                      keyboardType: TextInputType.number,
-                      pinTheme: PinTheme(
-                        activeColor: Colors.black,
-                        inactiveColor: Colors.black,
-                      ),
+                    CustomTextField(
+                      controller: _password,
+                      hintText: 'Enter new password',
+                      obscureText: false,
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Resend Code',
-                        style: TextStyle(color: Colors.blue[200]),
-                      ),
+                    const SizedBox(height: 20),
+                    CustomTextField(
+                      controller: _confirmPassword,
+                      hintText: 'confirm password',
+                      obscureText: false,
                     ),
                     const SizedBox(height: 40),
                     CustomButton(
                       onPressed: () {},
-                      text: 'Confirm',
+                      text: 'LogIn',
                     ),
                   ],
                 ),

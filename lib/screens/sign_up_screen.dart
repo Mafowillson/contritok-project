@@ -4,22 +4,29 @@ import 'package:contritok/widgets/custom_text_field.dart';
 import 'package:contritok/widgets/glass_box.dart';
 import 'package:flutter/material.dart';
 
-class LogInScreen extends StatefulWidget {
-  const LogInScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LogInScreen> createState() => _LogInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LogInScreenState extends State<LogInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
+  late final TextEditingController _userName;
+  late final TextEditingController _phoneController;
+  late final TextEditingController _confirmPassword;
   late final TextEditingController _email;
   late final TextEditingController _password;
   bool _passwordVisible = false;
+  bool _confirmPasswordVisible = false;
 
   @override
   void initState() {
     _email = TextEditingController();
     _password = TextEditingController();
+    _userName = TextEditingController();
+    _phoneController = TextEditingController();
+    _confirmPassword = TextEditingController();
     super.initState();
   }
 
@@ -47,73 +54,38 @@ class _LogInScreenState extends State<LogInScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               const Text(
-                'LogIn',
+                'SignUp',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 25,
                 ),
               ),
-              const SizedBox(height: 80),
+              const SizedBox(height: 60),
               GlassBox(
-                height: MediaQuery.of(context).size.height / 1.5,
+                height: MediaQuery.of(context).size.height / 1.2,
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(
-                      style: const ButtonStyle(
-                        side: MaterialStatePropertyAll(BorderSide(
-                          color: Colors.black,
-                          width: 2,
-                        )),
-                        backgroundColor: MaterialStatePropertyAll(
-                          Colors.transparent,
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/icons/google.webp',
-                            width: 20,
-                            height: 30,
-                          ),
-                          const SizedBox(width: 8),
-                          const Text(
-                            'Sign in with google',
-                            style: TextStyle(
-                              color: Colors.black,
-                            ),
-                          ),
-                        ],
-                      ),
+                    const Text(
+                      'Sign up to contriTok and be one of the \nfirst perssons to learn your mother tongue \ndigitally at your own pace.',
                     ),
                     const SizedBox(height: 40),
-                    const Row(
-                      children: [
-                        Expanded(
-                          child: Divider(
-                            thickness: 0.5,
-                            color: Colors.black,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text('Or login with'),
-                        ),
-                        Expanded(
-                          child: Divider(
-                            thickness: 0.5,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
+                    CustomTextField(
+                      controller: _userName,
+                      hintText: 'username',
+                      obscureText: false,
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 10),
+                    CustomTextField(
+                      controller: _phoneController,
+                      hintText: 'Phone number (optional)',
+                      obscureText: false,
+                    ),
+                    const SizedBox(height: 10),
                     CustomTextField(
                       controller: _email,
-                      hintText: 'Username or Email',
+                      hintText: 'Email adress',
                       obscureText: false,
                     ),
                     const SizedBox(height: 10),
@@ -135,22 +107,33 @@ class _LogInScreenState extends State<LogInScreen> {
                         ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text('Forgot Password?'),
+                    const SizedBox(height: 10),
+                    CustomTextField(
+                      controller: _confirmPassword,
+                      hintText: 'Confirm password',
+                      obscureText: !_confirmPasswordVisible,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _confirmPasswordVisible = !_confirmPasswordVisible;
+                          });
+                        },
+                        icon: Icon(
+                          //selects an icon based on password visibility
+                          _confirmPasswordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                         ),
-                      ],
+                      ),
                     ),
-                    CustomButton(onPressed: () {}, text: 'LogIn'),
+                    const SizedBox(height: 40),
+                    CustomButton(onPressed: () {}, text: 'SignUp'),
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          'Dont have an account?',
+                          'Already have an account?',
                           style: TextStyle(
                             color: Colors.white,
                           ),

@@ -14,10 +14,17 @@ class CustomButton extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.black,
+          shape: BeveledRectangleBorder(
+            borderRadius: BorderRadius.circular(4),
+          ),
+        ),
         onPressed: onPressed,
         child: Text(
           text,
           style: const TextStyle(
+            color: Colors.white,
             fontSize: 15,
             fontWeight: FontWeight.bold,
           ),
